@@ -6,6 +6,9 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Trust proxy for Railway deployment
+app.set('trust proxy', 1);
+
 // Middleware
 app.use(cors({
     origin: process.env.NODE_ENV === 'production' 
@@ -49,12 +52,17 @@ app.post('/api/chat', async (req, res) => {
         //     return res.status(401).json({ error: 'Unauthorized' });
         // }
         
+        // Debug logging for API key (first few characters only)
+        const apiKey = process.env.CLAUDE_API_KEY;
+        console.log('🔑 API Key present:', !!apiKey);
+        console.log('🔑 API Key starts with:', apiKey ? apiKey.substring(0, 10) + '...' : 'MISSING');
+        
         const response = await fetch('https://api.anthropic.com/v1/messages', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'anthropic-version': '2023-06-01',
-                'x-api-key': process.env.CLAUDE_API_KEY
+                'x-api-key': apiKey
             },
             body: JSON.stringify({
                 model: 'claude-3-haiku-20240307',
@@ -83,9 +91,12 @@ Remember: You're a supportive friend, not a therapist. Always encourage professi
         });
         
         if (!response.ok) {
+            const errorText = await response.text();
             console.error('Claude API error:', response.status, response.statusText);
+            console.error('Claude API error details:', errorText);
             return res.status(500).json({ 
-                error: 'Failed to get response from AI service' 
+                error: 'Failed to get response from AI service',
+                details: process.env.NODE_ENV === 'development' ? errorText : undefined
             });
         }
         
