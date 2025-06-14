@@ -88,12 +88,27 @@ struct ChatView: View {
         // Show typing indicator
         isTyping = true
         
-        // Simulate AI response delay
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-            isTyping = false
-            let aiResponse = generateContextualAIResponse(for: messageText)
-            let aiMessage = ChatMessage(content: aiResponse, isFromUser: false)
-            messages.append(aiMessage)
+        // Call the secure backend instead of using hardcoded responses
+        Task {
+            do {
+                let aiResponse = try await NetworkClient.shared.sendMessage(messageText)
+                
+                await MainActor.run {
+                    isTyping = false
+                    let aiMessage = ChatMessage(content: aiResponse, isFromUser: false)
+                    messages.append(aiMessage)
+                }
+            } catch {
+                await MainActor.run {
+                    isTyping = false
+                    let errorMessage = ChatMessage(
+                        content: "I'm having trouble connecting right now. Please try again in a moment. 💜", 
+                        isFromUser: false
+                    )
+                    messages.append(errorMessage)
+                }
+                print("Network error: \(error)")
+            }
         }
     }
     
