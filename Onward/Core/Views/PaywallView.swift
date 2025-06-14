@@ -69,7 +69,7 @@ struct PaywallView: View {
                 Image(systemName: "leaf.fill")
                     .font(.system(size: 14))
                     .foregroundColor(Color(red: 184/255, green: 197/255, blue: 184/255))
-                Text("Onward")
+                Text("No Contact Tracker")
                     .font(.custom("Nunito", size: 14))
                     .fontWeight(.medium)
                     .foregroundColor(Color(red: 139/255, green: 134/255, blue: 128/255))
@@ -122,7 +122,7 @@ struct PaywallView: View {
                     .multilineTextAlignment(.center)
                     .lineLimit(2)
                 
-                Text(context?.subtitle ?? "Experience the full power of Onward Premium")
+                Text(context?.subtitle ?? "Experience the full power of No Contact Tracker Premium")
                     .font(.custom("Nunito", size: 14))
                     .foregroundColor(Color(red: 139/255, green: 134/255, blue: 128/255).opacity(0.7))
                     .multilineTextAlignment(.center)

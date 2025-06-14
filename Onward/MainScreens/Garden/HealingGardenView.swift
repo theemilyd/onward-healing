@@ -64,7 +64,7 @@ struct HealingGardenView: View {
                 .padding(.bottom, 100)
             }
         }
-        .navigationBarHidden(true)
+            .navigationBarHidden(true)
         .sheet(isPresented: $showingChat) {
             ChatView()
         }

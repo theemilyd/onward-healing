@@ -39,8 +39,8 @@ class NetworkClient {
 
     // SECURE: API endpoint points to our secure backend instead of Claude directly
     // For development: http://localhost:3000/api/chat
-    // For production: Replace with your Railway URL
-    private let apiEndpoint = URL(string: "https://your-railway-app-name.railway.app/api/chat")
+    // For production: Railway deployment
+    private let apiEndpoint = URL(string: "https://onward-healing-production.up.railway.app/api/chat")
 
     /// Sends a message to our secure backend API and returns the response.
     func sendMessage(_ message: String, userId: String? = nil) async throws -> String {

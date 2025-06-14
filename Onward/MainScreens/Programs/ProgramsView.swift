@@ -102,7 +102,7 @@ private struct HeaderView: View {
                 
                 Spacer()
                 
-                Text("Onward")
+                Text("No Contact Tracker")
                     .font(.custom("Nunito", size: 16))
                     .fontWeight(.medium)
                     .foregroundColor(Color(red: 139/255, green: 134/255, blue: 128/255))

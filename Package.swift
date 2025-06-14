@@ -2,22 +2,22 @@
 import PackageDescription
 
 let package = Package(
-    name: "Onward",
+    name: "NoContactTracker",
     platforms: [
         .iOS(.v17)
     ],
     products: [
         .library(
-            name: "Onward",
-            targets: ["Onward"]
+            name: "NoContactTracker",
+            targets: ["NoContactTracker"]
         ),
     ],
     dependencies: [
-        .package(url: "https://github.com/RevenueCat/purchases-ios.git", from: "4.43.0")
+        .package(url: "https://github.com/RevenueCat/purchases-ios.git", from: "5.0.0")
     ],
     targets: [
         .target(
-            name: "Onward",
+            name: "NoContactTracker",
             dependencies: [
                 .product(name: "RevenueCat", package: "purchases-ios")
             ]

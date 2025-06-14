@@ -11,7 +11,7 @@ struct WelcomeView: View {
                 Spacer()
                 
                 // Placeholder for Logo
-                Text("Onward")
+                Text("No Contact Tracker")
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .foregroundColor(.white)

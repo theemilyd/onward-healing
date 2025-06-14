@@ -2,7 +2,7 @@ import SwiftUI
 import SwiftData
 
 @main
-struct OnwardApp: App {
+struct NoContactTrackerApp: App {
     
     let container: ModelContainer
     

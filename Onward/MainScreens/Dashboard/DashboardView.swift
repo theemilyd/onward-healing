@@ -61,7 +61,7 @@ struct DashboardView: View {
                             Image(systemName: "heart.fill")
                             Image(systemName: "waveform")
                             Text("Talk")
-                        }
+                    }
                         .font(.custom("Nunito", size: 16))
                         .fontWeight(.bold)
                         .foregroundColor(.white)
@@ -79,7 +79,7 @@ struct DashboardView: View {
                         )
                         .clipShape(Capsule())
                         .shadow(color: Color(red: 195/255, green: 177/255, blue: 225/255).opacity(0.4), radius: 10, x: 0, y: 5)
-                    }
+        }
                     .padding(.trailing, 20)
                     .padding(.bottom, 100)
                 }
@@ -181,7 +181,7 @@ struct DashboardView: View {
                         durationUnit(value: "\(profile.monthsSinceNoContact)", unit: "months")
                         durationUnit(value: "\(profile.weeksSinceNoContact % 4)", unit: "weeks")
                         durationUnit(value: "\(profile.daysSinceNoContact % 7)", unit: "days")
-                    }
+        }
                 case .detailed:
                     let components = profile.durationComponents
                     HStack(spacing: 30) {
@@ -228,12 +228,12 @@ struct DashboardView: View {
                 Image(systemName: "photo.fill")
                     .font(.system(size: 24))
                     .foregroundColor(Color(red: 195/255, green: 177/255, blue: 225/255).opacity(0.7))
-                    .frame(width: 60, height: 60)
+        .frame(width: 60, height: 60)
                     .background(Color(red: 195/255, green: 177/255, blue: 225/255).opacity(0.1))
-                    .clipShape(Circle())
+        .clipShape(Circle())
             }
             VStack(alignment: .leading, spacing: 4) {
-                Text("Your Why")
+            Text("Your Why")
                     .font(.custom("Nunito", size: 14))
                     .fontWeight(.bold)
                 Text(profile.whyStatement.isEmpty ? "\"I want to find peace...\"" : profile.whyStatement)
@@ -255,7 +255,7 @@ struct DashboardView: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text("Daily Check-in")
                     .font(.custom("Nunito", size: 14))
-                    .fontWeight(.bold)
+                .fontWeight(.bold)
                 Text("How are you feeling today?")
                     .font(.custom("Nunito", size: 12))
                     .foregroundColor(Color(red: 139/255, green: 134/255, blue: 128/255).opacity(0.7))
@@ -279,7 +279,7 @@ struct DashboardView: View {
         }
         .padding(20).background(Color(red: 245/255, green: 240/255, blue: 250/255))
         .cornerRadius(24).shadow(color: .black.opacity(0.05), radius: 10, x: 0, y: 5)
-    }
+}
 
     private func gardenSection(for profile: UserProfile) -> some View {
         HStack {
@@ -340,8 +340,8 @@ struct DashboardView: View {
         .padding(20).frame(maxWidth: .infinity)
         .background(Color(red: 195/255, green: 177/255, blue: 225/255).opacity(0.1))
         .cornerRadius(24).shadow(color: .black.opacity(0.05), radius: 5, x: 0, y: 2)
-    }
-    
+}
+
     private func startTimer() {
         guard profile?.precisionLevel == "minute" else { return }
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in currentTime = Date() }
@@ -408,7 +408,7 @@ struct QuickActionCard: View {
     var body: some View {
         Button(action: action) {
             VStack(alignment: .leading, spacing: 8) {
-                HStack {
+            HStack {
                     Image(systemName: icon)
                         .font(.system(size: 18, weight: .medium))
                         .foregroundColor(Color(red: 195/255, green: 177/255, blue: 225/255))
@@ -431,7 +431,7 @@ struct QuickActionCard: View {
             .background(Color.white)
             .cornerRadius(16)
             .shadow(color: .black.opacity(0.05), radius: 8, x: 0, y: 4)
-        }
+    }
         .buttonStyle(PlainButtonStyle())
     }
 }
@@ -490,7 +490,7 @@ struct WhyEditorView: View {
                         dismiss()
                     }
                     .fontWeight(.semibold)
-                }
+    }
             }
         }
     }

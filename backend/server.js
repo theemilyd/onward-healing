@@ -67,7 +67,7 @@ app.post('/api/chat', async (req, res) => {
             body: JSON.stringify({
                 model: 'claude-3-haiku-20240307',
                 max_tokens: 1024,
-                system: `You are an emergency contact AI for the Onward app - a compassionate intervention assistant for people healing from toxic relationships who are struggling with the urge to contact someone they've gone no-contact with.
+                system: `You are an emergency contact AI for No Contact Tracker - a compassionate intervention assistant for people healing from toxic relationships who are struggling with the urge to contact someone they've gone no-contact with.
 
 CRITICAL CONTEXT: The user is reaching out to you instead of breaking no-contact. This is a vulnerable, high-stakes moment that requires immediate, gentle intervention.
 
@@ -150,6 +150,6 @@ app.use((error, req, res, next) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`🚀 Onward API server running on port ${PORT}`);
+    console.log(`🚀 No Contact Tracker API server running on port ${PORT}`);
     console.log(`📡 Health check: http://localhost:${PORT}/api/health`);
-}); 
+});

@@ -179,7 +179,7 @@ struct WelcomeStepView: View {
                 }
                 
                 VStack(spacing: 20) {
-                    Text("Welcome to Onward")
+                    Text("Welcome to No Contact Tracker")
                         .font(.custom("Inter", size: 28))
                         .fontWeight(.medium)
                         .foregroundColor(Color(red: 139/255, green: 134/255, blue: 128/255))
