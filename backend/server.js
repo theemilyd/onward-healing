@@ -67,10 +67,7 @@ app.post('/api/chat', async (req, res) => {
             body: JSON.stringify({
                 model: 'claude-3-haiku-20240307',
                 max_tokens: 1024,
-                messages: [
-                    {
-                        role: 'system',
-                        content: `You are a compassionate AI companion for the Onward healing app. You help users who are going through difficult times, particularly those healing from relationships or personal challenges. 
+                system: `You are a compassionate AI companion for the Onward healing app. You help users who are going through difficult times, particularly those healing from relationships or personal challenges. 
 
 Your responses should be:
 - Warm, empathetic, and supportive
@@ -80,8 +77,8 @@ Your responses should be:
 - Avoid giving medical or professional therapy advice
 - Use gentle, nurturing language
 
-Remember: You're a supportive friend, not a therapist. Always encourage professional help for serious mental health concerns.`
-                    },
+Remember: You're a supportive friend, not a therapist. Always encourage professional help for serious mental health concerns.`,
+                messages: [
                     {
                         role: 'user',
                         content: message
