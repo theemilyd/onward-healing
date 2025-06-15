@@ -32,16 +32,17 @@ app.use('/api/', limiter);
 // Claude API endpoint
 app.post('/api/chat', async (req, res) => {
     try {
-        const { message, userId } = req.body;
+        const { history, userId } = req.body;
         
         // Basic validation
-        if (!message || typeof message !== 'string' || message.trim().length === 0) {
+        if (!history || !Array.isArray(history) || history.length === 0) {
             return res.status(400).json({ 
-                error: 'Message is required and must be a non-empty string' 
+                error: 'Message history is required and must be a non-empty array' 
             });
         }
         
-        if (message.length > 4000) {
+        const lastMessage = history[history.length - 1];
+        if (lastMessage.content.length > 4000) {
             return res.status(400).json({ 
                 error: 'Message too long. Maximum 4000 characters allowed.' 
             });
@@ -88,12 +89,7 @@ app.post('/api/chat', async (req, res) => {
 - **User is sad:** "I hear you. Sadness is part of this. Let it be here. It's like a wave, it will pass. You don't have to do anything about it."
 
 Be real. Be brief. Be a helpful, directive friend.`,
-                messages: [
-                    {
-                        role: 'user',
-                        content: message
-                    }
-                ]
+                messages: history
             })
         });
         
