@@ -147,7 +147,7 @@ struct OnboardingFlowView: View {
         
         // Trigger post-onboarding paywall
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            PaywallTrigger.shared.checkPostOnboarding()
+            _ = PaywallTrigger.shared.checkPostOnboarding()
         }
     }
 }

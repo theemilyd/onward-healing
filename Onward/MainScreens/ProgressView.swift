@@ -334,59 +334,61 @@ struct ProgressPageView: View {
     }
 
     var body: some View {
-        if let profile = profile {
-            ZStack {
-                ScrollView {
-                    VStack(spacing: 32) {
-                        header()
-                        
-                        growingBeautifullySection(profile: profile)
-                        
-                        streakSection(profile: profile)
-                        
-                        healingPathSection()
-                        
-                        momentsToCelebrateSection()
+        Group {
+            if let profile = profile {
+                ZStack {
+                    ScrollView {
+                        VStack(spacing: 32) {
+                            header()
+                            
+                            growingBeautifullySection(profile: profile)
+                            
+                            streakSection(profile: profile)
+                            
+                            healingPathSection()
+                            
+                            momentsToCelebrateSection()
 
-                        finalMessageSection()
-                    }
-                    .padding(.top, 48)
-                    .padding(.bottom, 120) // Space for floating button
-                }
-                .background(Color(hex: "#FAF7F5"))
-                .edgesIgnoringSafeArea(.all)
-
-                // Floating SOS Button
-                VStack {
-                    Spacer()
-                    HStack {
-                        Spacer()
-                        Button(action: { showingChat = true }) {
-                            HStack(spacing: 8) {
-                                Image(systemName: "heart.fill")
-                                    .font(.system(size: 16, weight: .medium))
-                                Text("SOS")
-                                    .font(.custom("Nunito", size: 16))
-                                    .fontWeight(.medium)
-                            }
-                            .foregroundColor(.white)
-                            .padding(.horizontal, 20)
-                            .padding(.vertical, 12)
-                            .background(
-                                Capsule()
-                                    .fill(Color(red: 195/255, green: 177/255, blue: 225/255))
-                                    .shadow(color: Color.black.opacity(0.15), radius: 8, x: 0, y: 4)
-                            )
+                            finalMessageSection()
                         }
+                        .padding(.top, 48)
+                        .padding(.bottom, 120) // Space for floating button
                     }
-                    .padding(.horizontal, 24)
-                    .padding(.bottom, 100)
+                    .background(Color(hex: "#FAF7F5"))
+                    .edgesIgnoringSafeArea(.all)
+
+                    // Floating SOS Button
+                    VStack {
+                        Spacer()
+                        HStack {
+                            Spacer()
+                            Button(action: { showingChat = true }) {
+                                HStack(spacing: 8) {
+                                    Image(systemName: "heart.fill")
+                                        .font(.system(size: 16, weight: .medium))
+                                    Text("SOS")
+                                        .font(.custom("Nunito", size: 16))
+                                        .fontWeight(.medium)
+                                }
+                                .foregroundColor(.white)
+                                .padding(.horizontal, 20)
+                                .padding(.vertical, 12)
+                                .background(
+                                    Capsule()
+                                        .fill(Color(red: 195/255, green: 177/255, blue: 225/255))
+                                        .shadow(color: Color.black.opacity(0.15), radius: 8, x: 0, y: 4)
+                                )
+                            }
+                        }
+                        .padding(.horizontal, 24)
+                        .padding(.bottom, 100)
+                    }
                 }
+            } else {
+                Text("Loading Progress...")
+                    .font(.custom("Nunito", size: 18))
+                    .foregroundColor(Color(hex: "#8B8680"))
             }
-        } else {
-            Text("Loading Progress...")
-                .font(.custom("Nunito", size: 18))
-                .foregroundColor(Color(hex: "#8B8680"))
         }
         .sheet(isPresented: $showingChat) {
             ChatView()
