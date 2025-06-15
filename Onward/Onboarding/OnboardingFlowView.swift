@@ -56,7 +56,11 @@ struct OnboardingFlowView: View {
                         Spacer()
                         
                         Button("Skip") {
-                            completeOnboarding()
+                            if currentStep < 5 {
+                                currentStep += 1
+                            } else {
+                                completeOnboarding()
+                            }
                         }
                         .font(.custom("Inter", size: 14))
                         .foregroundColor(Color(red: 139/255, green: 134/255, blue: 128/255).opacity(0.7))

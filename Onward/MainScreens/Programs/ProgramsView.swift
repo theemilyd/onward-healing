@@ -26,27 +26,6 @@ struct ProgramsView: View {
                 .padding(.bottom, 120) // Space for floating button and tab bar
             }
             
-            // Settings button in top-right corner
-            VStack {
-                HStack {
-                    Spacer()
-                    Button(action: { showingSettings = true }) {
-                        Image(systemName: "gearshape.fill")
-                            .font(.system(size: 20))
-                            .foregroundColor(Color(red: 139/255, green: 134/255, blue: 128/255))
-                            .frame(width: 44, height: 44)
-                            .background(
-                                Circle()
-                                    .fill(Color.white.opacity(0.8))
-                                    .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 2)
-                            )
-                    }
-                    .padding(.trailing, 20)
-                    .padding(.top, 60)
-                }
-                Spacer()
-            }
-            
             // Floating Talk Button
             VStack {
                 Spacer()
@@ -56,7 +35,7 @@ struct ProgramsView: View {
                         HStack(spacing: 8) {
                             Image(systemName: "heart.fill")
                                 .font(.system(size: 16, weight: .medium))
-                            Text("Talk")
+                            Text("SOS")
                                 .font(.custom("Nunito", size: 16))
                                 .fontWeight(.medium)
                         }
@@ -119,19 +98,24 @@ private struct HeaderView: View {
             
             // Title and subtitle
             VStack(spacing: 8) {
-                Text("Your Healing Journey Awaits")
-                    .font(.custom("Nunito", size: 24))
-                    .fontWeight(.bold)
-                    .foregroundColor(Color(red: 139/255, green: 134/255, blue: 128/255))
-                    .multilineTextAlignment(.center)
-                
-                Text("Evidence-based programs designed to guide you through recovery, step by gentle step")
-                    .font(.custom("Nunito", size: 14))
-                    .foregroundColor(Color(red: 139/255, green: 134/255, blue: 128/255).opacity(0.7))
-                    .multilineTextAlignment(.center)
-                    .lineSpacing(4)
-                    .padding(.horizontal, 32)
+                HStack {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("Programs")
+                            .font(.custom("Nunito", size: 24))
+                            .fontWeight(.bold)
+                            .foregroundColor(Color(red: 139/255, green: 134/255, blue: 128/255))
+                            .lineLimit(2)
+                            .multilineTextAlignment(.leading)
+                        
+                        Text("Evidence-based healing programs")
+                            .font(.custom("Nunito", size: 16))
+                            .foregroundColor(Color(red: 139/255, green: 134/255, blue: 128/255).opacity(0.7))
+                    }
+                    
+                    Spacer()
+                }
             }
+            .padding(.top, 20)
         }
     }
 }

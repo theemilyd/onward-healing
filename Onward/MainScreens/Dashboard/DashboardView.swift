@@ -59,11 +59,11 @@ struct DashboardView: View {
                     Button(action: { showingSOSChat = true }) {
                         HStack(spacing: 8) {
                             Image(systemName: "heart.fill")
-                            Image(systemName: "waveform")
-                            Text("Talk")
-                    }
-                        .font(.custom("Nunito", size: 16))
-                        .fontWeight(.bold)
+                                .font(.system(size: 16, weight: .medium))
+                            Text("SOS")
+                                .font(.custom("Nunito", size: 16))
+                                .fontWeight(.bold)
+                        }
                         .foregroundColor(.white)
                         .padding(.horizontal, 24)
                         .padding(.vertical, 16)
@@ -79,7 +79,7 @@ struct DashboardView: View {
                         )
                         .clipShape(Capsule())
                         .shadow(color: Color(red: 195/255, green: 177/255, blue: 225/255).opacity(0.4), radius: 10, x: 0, y: 5)
-        }
+                    }
                     .padding(.trailing, 20)
                     .padding(.bottom, 100)
                 }
@@ -116,19 +116,8 @@ struct DashboardView: View {
                             .font(.custom("Nunito", size: 16))
                             .foregroundColor(Color(red: 139/255, green: 134/255, blue: 128/255).opacity(0.7))
             }
-            Spacer()
             
-            Button(action: { showingSettings = true }) {
-                Image(systemName: "gearshape.fill")
-                    .font(.system(size: 20))
-                    .foregroundColor(Color(red: 139/255, green: 134/255, blue: 128/255))
-                    .frame(width: 44, height: 44)
-                    .background(
-                        Circle()
-                            .fill(Color.white.opacity(0.8))
-                            .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 2)
-                    )
-            }
+            Spacer()
         }
             }
             .padding(.top, 20)

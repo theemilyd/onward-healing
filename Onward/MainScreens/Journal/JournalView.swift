@@ -34,27 +34,6 @@ struct JournalView: View {
                     .tabViewStyle(.page(indexDisplayMode: .never))
                 }
                 
-                // Settings button in top-right corner
-            VStack {
-                    HStack {
-                        Spacer()
-                        Button(action: { showingSettings = true }) {
-                            Image(systemName: "gearshape.fill")
-                                .font(.system(size: 20))
-                                .foregroundColor(Color(red: 139/255, green: 134/255, blue: 128/255))
-                                .frame(width: 44, height: 44)
-                                .background(
-                                    Circle()
-                                        .fill(Color.white.opacity(0.8))
-                                        .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 2)
-                                )
-                        }
-                        .padding(.trailing, 20)
-                        .padding(.top, 60)
-                    }
-                    Spacer()
-                }
-                
                 // Floating Talk Button
                 VStack {
                     Spacer()
@@ -64,7 +43,7 @@ struct JournalView: View {
                             HStack(spacing: 8) {
                                 Image(systemName: "heart.fill")
                                     .font(.system(size: 16, weight: .medium))
-                                Text("Talk")
+                                Text("SOS")
                                     .font(.custom("Nunito", size: 16))
                                     .fontWeight(.medium)
                             }
@@ -101,14 +80,25 @@ struct JournalView: View {
 private extension JournalView {
     
     func HeaderView() -> some View {
-        VStack(spacing: 29) {
-            Text("Journal")
-                .font(.custom("Nunito", size: 24))
-                .fontWeight(.regular)
-                .foregroundColor(Color(red: 139/255, green: 134/255, blue: 128/255))
-                .padding(.top, 43)
+        VStack(spacing: 8) {
+            HStack {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("Journal")
+                        .font(.custom("Nunito", size: 24))
+                        .fontWeight(.bold)
+                        .foregroundColor(Color(red: 139/255, green: 134/255, blue: 128/255))
+                        .lineLimit(2)
+                        .multilineTextAlignment(.leading)
+                    
+                    Text("Your safe space for reflection")
+                        .font(.custom("Nunito", size: 16))
+                        .foregroundColor(Color(red: 139/255, green: 134/255, blue: 128/255).opacity(0.7))
+                }
+                
+                Spacer()
+            }
         }
-        .frame(height: 100)
+        .padding(.top, 20)
     }
     
     func TabSelectorView() -> some View {

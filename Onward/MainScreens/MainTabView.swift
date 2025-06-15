@@ -28,7 +28,7 @@ struct MainTabView: View {
                 case 3:
                     ProgramsView()
                 default:
-                    DashboardView()
+            DashboardView()
                 }
             }
             
@@ -43,7 +43,7 @@ struct MainTabView: View {
                 }
                 
                 TabBarButton(
-                    title: "Insights",
+                    title: "Journey",
                     icon: "chart.line.uptrend.xyaxis",
                     isSelected: selectedTab == 1
                 ) {
@@ -77,7 +77,7 @@ struct MainTabView: View {
             achievementManager.setModelContext(modelContext)
             if let profile = profile {
                 achievementManager.checkForNewAchievements(profile: profile)
-            }
+                }
         }
         .onChange(of: selectedTab) { oldValue, newValue in
             // Check for achievements when switching tabs
@@ -100,8 +100,8 @@ struct MainTabView: View {
         )
         .withPaywall()
 
-    }
-}
+                }
+        }
 
 struct TabBarButton: View {
     let title: String

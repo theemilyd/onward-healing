@@ -2,9 +2,15 @@ import Foundation
 
 // MARK: - Backend API Data Structures
 
+/// The individual message structure that Claude expects.
+struct MessagePayload: Codable {
+    let role: String
+    let content: String
+}
+
 /// The request body sent to our secure backend API.
 struct ChatRequest: Codable {
-    let message: String
+    let history: [MessagePayload]
     let userId: String?
 }
 
@@ -43,7 +49,7 @@ class NetworkClient {
     private let apiEndpoint = URL(string: "https://onward-healing-production.up.railway.app/api/chat")
 
     /// Sends a message to our secure backend API and returns the response.
-    func sendMessage(_ message: String, userId: String? = nil) async throws -> String {
+    func sendMessage(history: [ChatMessage], userId: String? = nil) async throws -> String {
         guard let url = apiEndpoint else {
             throw NetworkError.invalidURL
         }
@@ -52,9 +58,15 @@ class NetworkClient {
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
+        // Map [ChatMessage] to [MessagePayload]
+        let payload = history.map { message -> MessagePayload in
+            let role = message.isFromUser ? "user" : "assistant"
+            return MessagePayload(role: role, content: message.content)
+        }
+        
         // Construct the request body for our backend
         let requestBody = ChatRequest(
-            message: message,
+            history: payload,
             userId: userId
         )
         

@@ -8,6 +8,7 @@ struct ProgressPageView: View {
     @State private var currentStreak = 0
     @State private var showAchievementAnimation = false
     @State private var showingSettings = false
+    @State private var showingChat = false
 
     
     private var profile: UserProfile? {
@@ -355,57 +356,65 @@ struct ProgressPageView: View {
                 .background(Color(hex: "#FAF7F5"))
                 .edgesIgnoringSafeArea(.all)
 
-                // Settings button in top-right corner
+                // Floating SOS Button
                 VStack {
+                    Spacer()
                     HStack {
                         Spacer()
-                        Button(action: { showingSettings = true }) {
-                            Image(systemName: "gearshape.fill")
-                                .font(.system(size: 20))
-                                .foregroundColor(Color(red: 139/255, green: 134/255, blue: 128/255))
-                                .frame(width: 44, height: 44)
-                                .background(
-                                    Circle()
-                                        .fill(Color.white.opacity(0.8))
-                                        .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 2)
-                                )
+                        Button(action: { showingChat = true }) {
+                            HStack(spacing: 8) {
+                                Image(systemName: "heart.fill")
+                                    .font(.system(size: 16, weight: .medium))
+                                Text("SOS")
+                                    .font(.custom("Nunito", size: 16))
+                                    .fontWeight(.medium)
+                            }
+                            .foregroundColor(.white)
+                            .padding(.horizontal, 20)
+                            .padding(.vertical, 12)
+                            .background(
+                                Capsule()
+                                    .fill(Color(red: 195/255, green: 177/255, blue: 225/255))
+                                    .shadow(color: Color.black.opacity(0.15), radius: 8, x: 0, y: 4)
+                            )
                         }
-                        .padding(.trailing, 20)
-                        .padding(.top, 60)
                     }
-                    Spacer()
+                    .padding(.horizontal, 24)
+                    .padding(.bottom, 100)
                 }
-
-                floatingActionButton()
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
-                    .padding()
-            }
-            .sheet(isPresented: $showingSettings) {
-                SettingsView()
             }
         } else {
             Text("Loading Progress...")
                 .font(.custom("Nunito", size: 18))
                 .foregroundColor(Color(hex: "#8B8680"))
         }
+        .sheet(isPresented: $showingChat) {
+            ChatView()
+        }
     }
 
     @ViewBuilder
     private func header() -> some View {
-        HStack {
-            Button(action: {}) {
-                Image(systemName: "arrow.left")
-            }
-            Spacer()
-            Text("Your Journey")
-                .font(.custom("Nunito", size: 18))
-            Spacer()
-            Button(action: {}) {
-                Image(systemName: "square.and.arrow.up")
+        VStack(spacing: 8) {
+            HStack {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("Journey")
+                        .font(.custom("Nunito", size: 24))
+                        .fontWeight(.bold)
+                        .foregroundColor(Color(hex: "#8B8680"))
+                        .lineLimit(2)
+                        .multilineTextAlignment(.leading)
+                    
+                    Text("Your progress and growth")
+                        .font(.custom("Nunito", size: 16))
+                        .foregroundColor(Color(hex: "#8B8680").opacity(0.7))
+                }
+                
+                Spacer()
             }
         }
+        .padding(.top, 20)
         .padding(.horizontal)
-        .foregroundColor(Color(hex: "#8B8680"))
     }
     
     @ViewBuilder
@@ -426,9 +435,6 @@ struct ProgressPageView: View {
                     .overlay(
                         Circle().stroke(Color(hex: "#C3B1E1").opacity(0.2), lineWidth: 1)
                     )
-                Image(systemName: "leaf.fill")
-                    .font(.system(size: 24))
-                    .foregroundColor(Color(hex: "#8B8680"))
             }
             
             Text(message.title)
@@ -471,7 +477,7 @@ struct ProgressPageView: View {
             VStack(spacing: 8) {
                 HStack {
                     Image(systemName: "flame.fill")
-                        .foregroundColor(Color(hex: "#FF6B35"))
+                        .foregroundColor(Color(hex: "#B8C5B8"))
                     Text("Current Streak")
                         .font(.custom("Nunito-Bold", size: 12))
                         .foregroundColor(Color(hex: "#8B8680"))
@@ -479,7 +485,7 @@ struct ProgressPageView: View {
                 
                 Text("\(streak)")
                     .font(.custom("Nunito-Bold", size: 24))
-                    .foregroundColor(Color(hex: "#FF6B35"))
+                    .foregroundColor(Color(hex: "#B8C5B8"))
                 
                 Text(streak == 1 ? "day" : "days")
                     .font(.custom("Nunito", size: 10))
@@ -487,11 +493,11 @@ struct ProgressPageView: View {
             }
             .padding()
             .frame(maxWidth: .infinity)
-            .background(Color(hex: "#FF6B35").opacity(0.1))
+            .background(Color(hex: "#B8C5B8").opacity(0.1))
             .cornerRadius(16)
             .overlay(
                 RoundedRectangle(cornerRadius: 16)
-                    .stroke(Color(hex: "#FF6B35").opacity(0.3), lineWidth: 1)
+                    .stroke(Color(hex: "#B8C5B8").opacity(0.3), lineWidth: 1)
             )
             
             // Next Milestone
